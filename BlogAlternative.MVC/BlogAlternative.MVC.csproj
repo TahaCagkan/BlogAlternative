@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlogAlternative.BusinessLayer\BlogAlternative.BusinessLayer.csproj" />
+    <ProjectReference Include="..\BlogAlternative.DataAccessLayer\BlogAlternative.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\BlogAlternative.EntityLayer\BlogAlternative.EntityLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>
