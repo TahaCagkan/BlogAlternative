@@ -1,0 +1,43 @@
+﻿@using BlogAlternative.EntityLayer.Concrete
+@model List<Blog>
+
+@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        <h1>Yazarın Blogları</h1>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <a href="/Blog/BlogAdd/" class="btn btn-primary">Yeni Blog oluştur</a>
+            <hr />
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <th>Blog Başlığı</th>
+                    <th>Oluşturma Tarihi</th>
+                    <th>Kategori</th>
+                    <th>Durumu</th>
+                    <th>Sil</th>
+                    <th>Güncelle</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.BlogID</td>
+                        <td>@item.BlogTitle</td>
+                        <td>@item.BlogCreateDate</td>
+                        <td>@item.Category.CategoryName</td>
+                        <td>@item.BlogStatus</td>
+                        <td><a href="/Blog/DeleteBlog/@item.BlogID" class="btn btn-danger">Sil</a></td>
+                        <td><a href="/Blog/EditBlog/@item.BlogID" class="btn btn-warning">Düzenle</a></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

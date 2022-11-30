@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlogAlternative.EntityLayer.Concrete
 {
@@ -12,5 +13,7 @@ namespace BlogAlternative.EntityLayer.Concrete
         public string WriterMail { get; set; }
         public string WriterPassword { get; set; }
         public bool WriterStatus { get; set; }
+        public List<Blog> Blogs { get; set; }
+
     }
 }

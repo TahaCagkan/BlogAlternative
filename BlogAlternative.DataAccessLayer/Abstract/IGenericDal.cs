@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace BlogAlternative.DataAccessLayer.Abstract
 {
@@ -9,5 +11,6 @@ namespace BlogAlternative.DataAccessLayer.Abstract
         void Update(T t);
         List<T> GetListAll();
         T GetByID(int id);
+        List<T> GetListAll(Expression<Func<T,bool>>filter);
     }
 }

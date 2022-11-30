@@ -1,0 +1,64 @@
+﻿<footer class="py-5 bg-dark">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 footer-grid-agileits-w3ls text-left">
+				<h3>Hakkımızda</h3>
+				<p>CBlog kelimesinin Türkçede karşılığı olan “ağ günlüğü” ifadesi, pek yaygın kullanılmıyor olsa da bu tip internet sitelerinin işlevini net şekilde belirtir...</p>
+				<div class="read">
+					<a href="/About/Index/" class="btn btn-primary read-m">Devamını Oku</a>
+				</div>
+			</div>
+			<div class="col-lg-4 footer-grid-agileits-w3ls text-left">
+				@await Component.InvokeAsync("BlogThreeLastPost")
+			</div>
+			<!-- subscribe -->
+			<div class="col-lg-4 subscribe-main footer-grid-agileits-w3ls text-left">
+				@await Html.PartialAsync("~/Views/NewsLatter/SubscribeMail.cshtml")
+
+				<!-- //subscribe -->
+			</div>
+		</div>
+		<!-- footer -->
+		<div class="footer-cpy text-center">
+			<div class="footer-social">
+				<div class="copyrighttop">
+					<ul>
+						<li class="mx-3">
+							<a class="facebook" href="#">
+								<i class="fab fa-facebook-f"></i>
+								<span>Facebook</span>
+							</a>
+						</li>
+						<li>
+							<a class="facebook" href="#">
+								<i class="fab fa-twitter"></i>
+								<span>Twitter</span>
+							</a>
+						</li>
+						<li class="mx-3">
+							<a class="facebook" href="#">
+								<i class="fab fa-google-plus-g"></i>
+								<span>Google+</span>
+							</a>
+						</li>
+						<li>
+							<a class="facebook" href="#">
+								<i class="fab fa-pinterest-p"></i>
+								<span>Pinterest</span>
+							</a>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+			<div class="m-0 text-center text-white">
+				<p>
+					© 2022 Weblog. Tüm hakları sakldır.
+				</p>
+
+			</div>
+		</div>
+
+		<!-- //footer -->
+	</div>
+</footer>

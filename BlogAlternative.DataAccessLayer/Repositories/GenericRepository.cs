@@ -1,7 +1,9 @@
 ﻿using BlogAlternative.DataAccessLayer.Abstract;
 using BlogAlternative.DataAccessLayer.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace BlogAlternative.DataAccessLayer.Repositories
 {
@@ -32,12 +34,17 @@ namespace BlogAlternative.DataAccessLayer.Repositories
             context.Add(t);
             context.SaveChanges();
         }
-
+    
         public void Update(T t)
         {
             using var context = new BlogAlternativeContext();
             context.Update(t);
             context.SaveChanges();
+        }
+        public List<T> GetListAll(Expression<Func<T, bool>> filter)
+        {
+            using var context = new BlogAlternativeContext();
+            return context.Set<T>().Where(filter).ToList();
         }
     }
 }
