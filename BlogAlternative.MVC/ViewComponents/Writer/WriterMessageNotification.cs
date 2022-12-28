@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BlogAlternative.BusinessLayer.Concrete;
+using BlogAlternative.DataAccessLayer.EntiyFramework;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAlternative.MVC.ViewComponents.Writer
 {
     public class WriterMessageNotification:ViewComponent
     {
-        public IViewComponentResult Invoke( )
+        MessageManager messageManager = new MessageManager(new EfAllMessageRepository());
+        public IViewComponentResult Invoke()
         {
-           
-            return View();
+            int id = 2;
+            var values = messageManager.GetInboxListByWriter(id);
+            return View(values);
         }
     }
 }
