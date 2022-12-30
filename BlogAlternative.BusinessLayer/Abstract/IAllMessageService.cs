@@ -5,7 +5,7 @@ namespace BlogAlternative.BusinessLayer.Abstract
 {
     public interface IAllMessageService:IGenericService<AllMessage>
     {
-        public List<AllMessage> GetInboxListByWriter(int Id);
+        public List<AllMessage> GetInboxListByWriter(int id);
 
     }
 }

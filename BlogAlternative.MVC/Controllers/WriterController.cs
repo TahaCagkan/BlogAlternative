@@ -1,5 +1,6 @@
 ﻿using BlogAlternative.BusinessLayer.Concrete;
 using BlogAlternative.BusinessLayer.ValidationRules;
+using BlogAlternative.DataAccessLayer.Concrete;
 using BlogAlternative.DataAccessLayer.EntiyFramework;
 using BlogAlternative.EntityLayer.Concrete;
 using BlogAlternative.MVC.Models;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace BlogAlternative.MVC.Controllers
 {
@@ -16,34 +18,38 @@ namespace BlogAlternative.MVC.Controllers
 	{
         WriterManager wm = new WriterManager(new EfWriterRepository());
 
-		[AllowAnonymous]
+		[Authorize]
         public IActionResult Index()
 		{
+            var usermail = User.Identity.Name;
+            ViewBag.v = usermail;
+            BlogAlternativeContext bc = new BlogAlternativeContext();
+            var writerName = bc.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterName).FirstOrDefault();
+            ViewBag.v2 = writerName;
 			return View();
 		}
 
-        [AllowAnonymous]
         public PartialViewResult WriterNavbarPartial()
 		{
 			return PartialView();
 		}
 
-        [AllowAnonymous]
         public PartialViewResult WriterFooterPartial()
         {
             return PartialView();
         }
 
-        [AllowAnonymous]
         [HttpGet]
-        public IActionResult WriterEditProfie()
+        public IActionResult WriterEditProfile()
         {
-            var writerValues = wm.TGetById(1);
+            BlogAlternativeContext bc = new BlogAlternativeContext();
+            var usermail = User.Identity.Name;
+            var writerID = bc.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            var writerValues = wm.TGetById(writerID);
             return View(writerValues);
         }
-        [AllowAnonymous]
         [HttpPost]
-        public IActionResult WriterEditProfie(Writer wr)
+        public IActionResult WriterEditProfile(Writer wr)
         {
             WriterValidator wl = new WriterValidator();
             ValidationResult result = wl.Validate(wr);
@@ -61,13 +67,11 @@ namespace BlogAlternative.MVC.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult WriterAdd()
         {
             return View();
         }
-        [AllowAnonymous]
         [HttpPost]
         public IActionResult WriterAdd(AddProfileImage addProfileImage)
         {

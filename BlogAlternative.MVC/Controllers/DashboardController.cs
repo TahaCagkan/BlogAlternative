@@ -1,5 +1,4 @@
 ﻿using BlogAlternative.DataAccessLayer.Concrete;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -7,7 +6,6 @@ namespace BlogAlternative.MVC.Controllers
 {
     public class DashboardController : Controller
     {
-        [AllowAnonymous]
         public IActionResult Index()
         {
             BlogAlternativeContext db = new BlogAlternativeContext();

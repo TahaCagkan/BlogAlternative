@@ -34,8 +34,8 @@ namespace BlogAlternative.MVC.Controllers
                 var userIdentity = new ClaimsIdentity(claims, "admin");
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
                 await HttpContext.SignInAsync(principal);
-                HttpContext.Session.SetString("username", writer.WriterMail);
-                return RedirectToAction("Index", "Writer");
+                //HttpContext.Session.SetString("username", writer.WriterMail);
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {

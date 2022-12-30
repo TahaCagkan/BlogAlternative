@@ -14,10 +14,10 @@ namespace BlogAlternative.BusinessLayer.Concrete
             _messageDal = messageDal;
         }
 
-        public List<AllMessage> GetInboxListByWriter(int Id)
+        public List<AllMessage> GetInboxListByWriter(int id)
         {
             //alıcının string değerini eşitledik
-            return _messageDal.GetListAll(x => x.ReceiverID == Id);
+            return _messageDal.GetListWithMessageByWriter(id);
         }
 
         public List<AllMessage> GetListAll()
@@ -37,7 +37,7 @@ namespace BlogAlternative.BusinessLayer.Concrete
 
         public AllMessage TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _messageDal.GetByID(id);
         }
 
         public void TUpdate(AllMessage t)

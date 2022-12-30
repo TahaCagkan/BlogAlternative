@@ -1,0 +1,22 @@
+﻿@model BlogAlternative.EntityLayer.Concrete.AllMessage
+@{
+    ViewData["Title"] = "MessageDetails";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<h2>Mesaj Detay</h2>
+<br />
+
+@Html.Label("Mesaj ID")
+@Html.TextBoxFor(x => x.MessageID,new{@class="form-control"})
+<br />
+@Html.Label("Mesaj Başlığı")
+@Html.TextBoxFor(x => x.Subject, new { @class = "text-danger" })
+<br />
+@Html.Label("Mesaj İçeriği")
+@Html.TextAreaFor(x => x.MessageDetails,20,3, new { @class = "text-danger" })
+<br />
+
+<br />
+<a href="/Message/InBox/" class="btn btn-success">Mesajlara Dön</a>
+

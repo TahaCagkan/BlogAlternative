@@ -1,5 +1,6 @@
 ﻿using BlogAlternative.BusinessLayer.Concrete;
 using BlogAlternative.BusinessLayer.ValidationRules;
+using BlogAlternative.DataAccessLayer.Concrete;
 using BlogAlternative.DataAccessLayer.EntiyFramework;
 using BlogAlternative.EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -12,11 +13,11 @@ using System.Linq;
 
 namespace BlogAlternative.MVC.Controllers
 {
-    [AllowAnonymous]
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
+        BlogAlternativeContext bc = new BlogAlternativeContext();
 
         //Index sayfası
         public IActionResult Index()
@@ -34,8 +35,10 @@ namespace BlogAlternative.MVC.Controllers
         //admin palenli blogların listelenmesi
         public ActionResult BlogListByWriter()
         {
+            var usermail = User.Identity.Name;
+            var writerID = bc.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
             //kategori isimlerinin getirilmesi
-            var values = bm.GetListWithCategoryByWriterID(1);
+            var values = bm.GetListWithCategoryByWriterID(writerID);
             return View(values);
         }
         //ekleme get
@@ -55,13 +58,15 @@ namespace BlogAlternative.MVC.Controllers
         [HttpPost]
         public ActionResult BlogAdd(Blog blog)
         {
+            var usermail = User.Identity.Name;
+            var writerID = bc.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
             BlogValidator validatorRule = new BlogValidator();
             ValidationResult validationResults = validatorRule.Validate(blog);
             if (validationResults.IsValid)
             {
                 blog.BlogStatus = true;
                 blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString()).ToString();
-                blog.WriterID = 1;
+                blog.WriterID = writerID;
                 bm.TAdd(blog);
                 return RedirectToAction("BlogListByWriter", "Blog");
             }
@@ -84,7 +89,7 @@ namespace BlogAlternative.MVC.Controllers
         [HttpGet]
         public IActionResult EditBlog(int id)
         {
-       
+
             var blogValue = bm.TGetById(id);
             List<SelectListItem> categoryValues = (from x in cm.GetListAll()
                                                    select new SelectListItem
@@ -98,7 +103,10 @@ namespace BlogAlternative.MVC.Controllers
         [HttpPost]
         public IActionResult EditBlog(Blog blog)
         {
-            blog.WriterID = 1;
+
+            var usermail = User.Identity.Name;
+            var writerID = bc.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            blog.WriterID = writerID;
             blog.BlogStatus = true;
             blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString()).ToString();
             bm.TUpdate(blog);
