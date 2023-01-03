@@ -91,7 +91,7 @@ namespace BlogAlternative.MVC.Areas.Admin.Controllers
 
         public IActionResult BlogTitleListExcel()
         {
-            return View();
+            return RedirectToAction();
         }
     }
 

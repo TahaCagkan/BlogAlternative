@@ -23,6 +23,30 @@ namespace BlogAlternative.BusinessLayer.Concrete
         {
             return _commentDal.GetListAll(x => x.BlogID == id);
         }
-    
+
+        public List<Comment> GetListAll()
+        {
+            return _commentDal.GetListAll();
+        }
+
+        public void TAdd(Comment t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TDelete(Comment t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Comment TGetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TUpdate(Comment t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
