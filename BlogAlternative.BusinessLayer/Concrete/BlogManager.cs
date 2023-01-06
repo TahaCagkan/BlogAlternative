@@ -39,7 +39,7 @@ namespace BlogAlternative.BusinessLayer.Concrete
 			return _blogDal.GetListAll().Take(3).ToList();
 		}
 
-		public void TAdd(Blog t)
+        public void TAdd(Blog t)
 		{
 			_blogDal.Insert(t);
 		}
@@ -63,5 +63,7 @@ namespace BlogAlternative.BusinessLayer.Concrete
 		{
 			return _blogDal.GetByID(id);
 		}
+
+	
 	}
 }

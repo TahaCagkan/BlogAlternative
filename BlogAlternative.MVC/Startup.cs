@@ -21,8 +21,9 @@ namespace BlogAlternative.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddRazorPages();
+            services.AddMemoryCache();
             services.AddControllersWithViews();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
 
             //services.AddSession();
 
@@ -47,6 +48,7 @@ namespace BlogAlternative.MVC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
             else
             {
@@ -64,7 +66,6 @@ namespace BlogAlternative.MVC
             app.UseRouting();
 
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

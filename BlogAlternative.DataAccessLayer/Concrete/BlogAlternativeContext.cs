@@ -36,6 +36,7 @@ namespace BlogAlternative.DataAccessLayer.Concrete
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<AllMessage> AllMessages { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
     }
 }
